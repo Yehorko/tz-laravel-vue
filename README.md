@@ -9,9 +9,11 @@
 	
 4) В php контейнере установить зависимости Laravel через composer и запустить миграции
 	`docker exec -it php-container /bin/bash`
+
 	`composer install`
+
 	`php artisan migrate`
-5) Запустить в этом-же php контейнере обработчик очереди на парсинг файлов:
+6) Запустить в этом-же php контейнере обработчик очереди на парсинг файлов:
    `php artisan queue:work --queue=default`
    
    
