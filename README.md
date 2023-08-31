@@ -8,7 +8,8 @@
     `docker compose up -d`
 	
 4) В php контейнере установить зависимости Laravel через composer и запустить миграции
-	`docker exec -it php-container /bin/bash`
+	
+ 	`docker exec -it php-container /bin/bash`
 
 	`composer install`
 
