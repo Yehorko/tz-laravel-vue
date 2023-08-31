@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  nodejs:
+    image: node:latest
+    build:
+        context: ./
+        dockerfile: docker/node-front/Dockerfile
+    container_name: nodejs-container
+    volumes:
+      - ./frontend:/var/www/frontend
+    ports:
+      - "8074:8080"
+    networks:
+      lara-vue-network:
+        ipv4_address: ${LARA_VUE_NETWORK:-192.13.0}.91
+    #command: bash -c "tail -f /dev/null"
+    command: bash -c "npm run serve"
+    working_dir: /var/www/frontend
+  
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    ports:
+      - "8083:80"
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - php
+    links:
+      - php
+    networks:
+      lara-vue-network:
+        ipv4_address: ${LARA_VUE_NETWORK:-192.13.0}.92
+  
+  php:
+    image: php:8.0-fpm
+    build:
+        context: ./
+        dockerfile: docker/php/Dockerfile
+    container_name: php-container
+    volumes:
+      - ./backend:/var/www/laravel-api
+      - ./:/var/www/project-root
+    depends_on:
+      - postgres
+    environment:
+      - APP_DEBUG=true
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=jozeppe
+      - POSTGRES_PASSWORD=12323
+      - POSTGRES_DATABASE=laravel
+    ports:
+      - "9000:9000"
+    #command: bash -c "composer install && php artisan queue:work --queue=default"
+    working_dir: /var/www/laravel-api
+    networks:
+      lara-vue-network:
+        ipv4_address: ${LARA_VUE_NETWORK:-192.13.0}.93
+ 
+  
+  postgres:
+    image: postgres:15
+    container_name: postgres-container
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=jozeppe
+      - POSTGRES_PASSWORD=12323
+      - POSTGRES_DB=laravel
+    volumes:
+      - ./docker/postgres:/var/lib/postgresql/data
+    networks:
+      lara-vue-network:
+        ipv4_address: ${LARA_VUE_NETWORK:-192.13.0}.95
+  
+  adminer:
+    image: adminer:latest
+    container_name: adminer-container
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      lara-vue-network:
+        ipv4_address: ${LARA_VUE_NETWORK:-192.13.0}.96
+        
+networks:
+  lara-vue-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${LARA_VUE_NETWORK:-192.13.0}.0/24
+    driver_opts:
+      com.docker.network.bridge.name: br_LARA_VUE
