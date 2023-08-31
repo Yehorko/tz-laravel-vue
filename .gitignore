@@ -1,5 +1,5 @@
 .DS_Store
-/docker/postgres
+/docker/postgres/*
 
 # Editor directories and files
 .idea
