@@ -25,9 +25,12 @@
 После этого проект является полностью рабочим.
 
 Фронтенд доступен по адресу можно проверять загрузку файлов:
+
    http://localhost:8074/#/
+
    
 Админ панель базы Postgresql доступна по адресу:
+
 http://localhost:8081/?pgsql=postgres%3A5432&username=jozeppe&db=laravel&ns=public
    
    
