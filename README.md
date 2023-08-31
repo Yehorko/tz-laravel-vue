@@ -1,13 +1,15 @@
 
 Для запуска данного проекта необходимо выполнить следующие действия:
 1) Клонируем репозиторий:
-  `git clone https://github.com/Yehorko/tz-laravel-vue.git`
-2) Создать директорию "postgres" в папке /docker в которой база будет хранить данные
+
+`git clone https://github.com/Yehorko/tz-laravel-vue.git`
+3) Создать директорию "postgres" в папке /docker в которой база будет хранить данные
 	
-3) Запустить докер-контейнеры в корневой директории проекта:
-    `docker compose up -d`
+4) Запустить докер-контейнеры в корневой директории проекта:
+
+   `docker compose up -d`
 	
-4) В php контейнере установить зависимости Laravel через composer и запустить миграции
+5) В php контейнере установить зависимости Laravel через composer и запустить миграции
 	
  	`docker exec -it php-container /bin/bash`
 
