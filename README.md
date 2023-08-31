@@ -2,7 +2,7 @@
 Для запуска данного проекта необходимо выполнить следующие действия:
 1) Клонируем репозиторий:
 
-`git clone https://github.com/Yehorko/tz-laravel-vue.git`
+	`git clone https://github.com/Yehorko/tz-laravel-vue.git`
 
 3) Создать директорию "postgres" в папке /docker в которой база будет хранить данные
 	
