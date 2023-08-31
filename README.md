@@ -15,6 +15,7 @@
 
 	`php artisan migrate`
 6) Запустить в этом-же php контейнере обработчик очереди на парсинг файлов:
+
    `php artisan queue:work --queue=default`
    
    
