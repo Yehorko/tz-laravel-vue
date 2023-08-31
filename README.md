@@ -5,7 +5,7 @@
 2) Создать директорию "postgres" в папке /docker в которой база будет хранить данные
 	
 3) Запустить докер-контейнеры в корневой директории проекта:
-    docker compose up -docker
+    docker compose up -d
 	
 4) В php контейнере установить зависимости Laravel через composer и запустить миграции
 	docker exec -it php-container /bin/bash
